@@ -3,6 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "InputAction.h"
+#include "EnhancedInputComponent.h"
 #include "HealthComponent.h"
 #include "GameFramework/Character.h"
 #include "PlayableCharacter.generated.h"
@@ -14,6 +16,8 @@ class UCameraComponent;
 class UCharacterMovementComponent;
 class UCapsuleComponent;
 class UHealthComponent;
+class UInputAction;
+struct FInputActionValue;
 #pragma endregion
 
 UCLASS()
@@ -56,6 +60,21 @@ public:
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
 	TObjectPtr<APlayerController> PlayerController;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Input")
+	UInputAction* AttackAction;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Input")
+	UInputAction* MoveAction;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Input")
+	UInputAction* JumpAction;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Input")
+	UInputAction* InteractAction;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Input")
+	UInputAction* DodgeAction;
+
 #pragma endregion
 
 protected:
@@ -69,15 +88,21 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-#pragma region Functions
-	/*UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void Death();
+#pragma region Functions	
+	UFUNCTION(BlueprintCallable)
+	void DoAttack(const FInputActionValue& InputValue);
 	
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void Damage();
+	UFUNCTION(BlueprintCallable)
+	void DoMove(const FInputActionValue& InputValue);
 	
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void Movement();*/
+	UFUNCTION(BlueprintCallable)
+	void DoJump(const FInputActionValue& InputValue);
+	
+	UFUNCTION(BlueprintCallable)
+	void DoInteract(const FInputActionValue& InputValue);
+
+	UFUNCTION(BlueprintCallable)
+	void DoDodge(const FInputActionValue& InputValue);
 
 #pragma endregion
 };

@@ -2,7 +2,6 @@
 
 
 #include "PlayableCharacter.h"
-
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
@@ -13,15 +12,16 @@ APlayableCharacter::APlayableCharacter()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	CapsuleComp = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CapsuleComponent"));
+	/*CapsuleComp = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CapsuleComponent"));
 	SetRootComponent(CapsuleComp);
 	
 	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMesh"));
-	StaticMesh->SetupAttachment(GetRootComponent());
+	StaticMesh->SetupAttachment(GetRootComponent());*/
 
 	MovementComp = CreateDefaultSubobject<UCharacterMovementComponent>(TEXT("MovementComponent"));
 	HealthComp = CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"));
 	PlayerController = CreateDefaultSubobject<APlayerController>(TEXT("PlayerController"));
+	PlayerController = UGameplayStatics::GetPlayerController(this, 0);
 }
 
 // Called when the game starts or when spawned
@@ -43,19 +43,38 @@ void APlayableCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+	if (UEnhancedInputComponent* NewInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
+	{
+		NewInputComponent->BindAction(AttackAction, ETriggerEvent::Triggered, this, &APlayableCharacter::DoAttack);
+		NewInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &APlayableCharacter::DoMove);
+		NewInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &APlayableCharacter::DoJump);
+		NewInputComponent->BindAction(InteractAction, ETriggerEvent::Triggered, this, &APlayableCharacter::DoInteract);
+		NewInputComponent->BindAction(DodgeAction, ETriggerEvent::Triggered, this, &APlayableCharacter::DoDodge);
+	}
+
 }
 
-/*void APlayableCharacter::Movement_Implementation()
+void APlayableCharacter::DoAttack(const FInputActionValue& InputValue)
+{
+
+}
+
+void APlayableCharacter::DoMove(const FInputActionValue& InputValue)
 {
 	
 }
 
-void APlayableCharacter::Damage_Implementation()
-{
-	//UGameplayStatics::ApplyDamage();
-}
-
-void APlayableCharacter::Death_Implementation()
+void APlayableCharacter::DoJump(const FInputActionValue& InputValue)
 {
 	
-}*/
+}
+
+void APlayableCharacter::DoInteract(const FInputActionValue& InputValue)
+{
+	
+}
+
+void APlayableCharacter::DoDodge(const FInputActionValue& InputValue)
+{
+	
+}
