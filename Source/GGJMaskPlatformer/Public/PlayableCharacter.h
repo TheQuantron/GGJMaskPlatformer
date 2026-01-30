@@ -13,6 +13,7 @@
 class UStaticMesh;
 class UInputComponent;
 class UCameraComponent;
+class USpringArmComponent;
 class UCharacterMovementComponent;
 class UCapsuleComponent;
 class UHealthComponent;
@@ -39,8 +40,14 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float PlayerAttackSpeed;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float SpringArmLength;
+
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
 	TObjectPtr<UCameraComponent> CameraComp;
+
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
+	TObjectPtr<USpringArmComponent> SpringArmComp;
 
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
 	TObjectPtr<UStaticMeshComponent> StaticMesh;
@@ -61,19 +68,19 @@ public:
 	TObjectPtr<APlayerController> PlayerController;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Input")
-	UInputAction* AttackAction;
+	TObjectPtr<UInputAction> AttackAction;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Input")
-	UInputAction* MoveAction;
+	TObjectPtr<UInputAction> MoveAction;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Input")
-	UInputAction* JumpAction;
+	TObjectPtr<UInputAction> JumpAction;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Input")
-	UInputAction* InteractAction;
+	TObjectPtr<UInputAction> InteractAction;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Input")
-	UInputAction* DodgeAction;
+	TObjectPtr<UInputAction> DodgeAction;
 
 #pragma endregion
 

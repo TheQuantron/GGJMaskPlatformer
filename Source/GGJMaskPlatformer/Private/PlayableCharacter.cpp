@@ -2,8 +2,10 @@
 
 
 #include "PlayableCharacter.h"
+#include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "GameFramework/SpringArmComponent.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values
@@ -12,11 +14,24 @@ APlayableCharacter::APlayableCharacter()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	/*CapsuleComp = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CapsuleComponent"));
+	CapsuleComp = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CapsuleComponent"));
 	SetRootComponent(CapsuleComp);
+	CapsuleComp->SetCollisionObjectType(ECC_Pawn);
+	CapsuleComp->SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
+	CapsuleComp->SetCollisionResponseToChannel(ECC_Visibility, ECR_Ignore);
 	
 	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMesh"));
-	StaticMesh->SetupAttachment(GetRootComponent());*/
+	StaticMesh->SetupAttachment(GetRootComponent());
+
+	SpringArmComp = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArmComponent"));
+	SpringArmComp->SetupAttachment(GetRootComponent());
+	SpringArmComp->SetRelativeRotation(FRotator(0, 0, 0));
+	SpringArmComp->TargetArmLength = SpringArmLength;
+	SpringArmComp->bDoCollisionTest = false;
+	SpringArmComp->bInheritYaw = false;
+	
+	CameraComp = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraComponent"));
+	CameraComp->SetupAttachment(SpringArmComp);
 
 	MovementComp = CreateDefaultSubobject<UCharacterMovementComponent>(TEXT("MovementComponent"));
 	HealthComp = CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"));
