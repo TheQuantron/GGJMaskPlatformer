@@ -13,7 +13,7 @@ AProjectileActor::AProjectileActor()
 	PlayerCont = CreateDefaultSubobject<APlayerController>(TEXT("PlayerController"));
 	
 	HealthComp = CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"));
-	HealthComp = UHealthComponent::OnDamageEvent(PlayerChar, DamageNum, DamageType, PlayerCont, this);
+	HealthComp = UHealthComponent::OnDamageEvent(PlayerChar, DamageNum, , PlayerCont, this);
 }
 
 // Called when the game starts or when spawned
