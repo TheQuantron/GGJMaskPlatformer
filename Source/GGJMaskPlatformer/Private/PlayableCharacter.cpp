@@ -78,18 +78,18 @@ void APlayableCharacter::DoAttack(const FInputActionValue& InputValue)
 void APlayableCharacter::DoMove(const FInputActionValue& InputValue)
 {
 	FVector2D Direction = InputValue.Get<FVector2D>();
-	LastControlInputVector.X = Direction.X;
-	LastControlInputVector.Y = Direction.Y;
 
-	FRotator MoveDirection = FRotator( GetControlRotation().Pitch, GetControlRotation().Yaw, 0);
-
-	GetMovementComponent()->AddInputVector(MoveDirection.RotateVector(FVector::ForwardVector) * Direction.X);
-	GetMovementComponent()->AddInputVector(MoveDirection.RotateVector(FVector::ForwardVector) * Direction.Y);
+	if (PlayerController != nullptr)
+	{
+		FVector RightDirection = FVector(1.0f, 0.0f, 0.0f);
+		
+		AddMovementInput(RightDirection, Direction.X, true);
+	}
 }
 
 void APlayableCharacter::DoJump(const FInputActionValue& InputValue)
 {
-	
+	FVector2D Upwards = InputValue.Get<FVector2D>();
 }
 
 void APlayableCharacter::DoInteract(const FInputActionValue& InputValue)
