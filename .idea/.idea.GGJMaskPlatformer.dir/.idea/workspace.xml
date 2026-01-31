@@ -11,7 +11,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GGJMaskPlatformer.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GGJMaskPlatformer.dir/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/GGJMaskPlatformer/Private/PlayableCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GGJMaskPlatformer/Private/PlayableCharacter.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/GGJMaskPlatformer/Private/ProjectileActor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GGJMaskPlatformer/Private/ProjectileActor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GGJMaskPlatformer/Public/PlayableCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GGJMaskPlatformer/Public/PlayableCharacter.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/GGJMaskPlatformer/Public/ProjectileActor.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GGJMaskPlatformer/Public/ProjectileActor.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -153,7 +152,7 @@
       <workItem from="1769552459836" duration="22019000" />
       <workItem from="1769643644068" duration="10723000" />
       <workItem from="1769727635065" duration="839000" />
-      <workItem from="1769728498702" duration="10034000" />
+      <workItem from="1769728498702" duration="14886000" />
     </task>
     <servers />
   </component>

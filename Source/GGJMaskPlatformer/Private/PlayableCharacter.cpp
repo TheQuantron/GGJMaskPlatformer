@@ -32,6 +32,7 @@ APlayableCharacter::APlayableCharacter()
 	
 	CameraComp = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraComponent"));
 	CameraComp->SetupAttachment(SpringArmComp);
+	CameraComp->SetProjectionMode(ECameraProjectionMode::Orthographic);
 
 	MovementComp = CreateDefaultSubobject<UCharacterMovementComponent>(TEXT("MovementComponent"));
 	HealthComp = CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"));
@@ -76,7 +77,14 @@ void APlayableCharacter::DoAttack(const FInputActionValue& InputValue)
 
 void APlayableCharacter::DoMove(const FInputActionValue& InputValue)
 {
-	
+	FVector2D Direction = InputValue.Get<FVector2D>();
+	LastControlInputVector.X = Direction.X;
+	LastControlInputVector.Y = Direction.Y;
+
+	FRotator MoveDirection = FRotator( GetControlRotation().Pitch, GetControlRotation().Yaw, 0);
+
+	GetMovementComponent()->AddInputVector(MoveDirection.RotateVector(FVector::ForwardVector) * Direction.X);
+	GetMovementComponent()->AddInputVector(MoveDirection.RotateVector(FVector::ForwardVector) * Direction.Y);
 }
 
 void APlayableCharacter::DoJump(const FInputActionValue& InputValue)

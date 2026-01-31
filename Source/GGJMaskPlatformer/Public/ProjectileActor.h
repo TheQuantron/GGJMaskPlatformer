@@ -24,6 +24,9 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float FireSpeed;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	TObjectPtr<UDamageType> DamageType;
 
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
 	TObjectPtr<UHealthComponent> HealthComp;
