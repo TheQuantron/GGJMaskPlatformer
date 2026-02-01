@@ -8,10 +8,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="91c6d8be-23ab-41bc-8067-a76117c1ee08" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.GGJMaskPlatformer.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GGJMaskPlatformer.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Art/Textures/T_MainPlayer.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Art/Textures/T_MainPlayer.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Art/Textures/T_Menu.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Art/Textures/T_Menu.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Art/Textures/T_TitleAndCredits.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Art/Textures/T_TitleAndCredits.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Art/Textures/T_Environment_Default.png" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Art/Textures/T_Environment_Default.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Art/Textures/T_Environment_Default.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Art/Textures/T_Environment_Default.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Levels/Level_1.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/Level_1.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Levels/TM_Level_1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/TM_Level_1.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,7 +157,7 @@
       <workItem from="1769727635065" duration="839000" />
       <workItem from="1769728498702" duration="19159000" />
       <workItem from="1769897228541" duration="5006000" />
-      <workItem from="1769962909935" duration="1779000" />
+      <workItem from="1769962909935" duration="2383000" />
     </task>
     <servers />
   </component>
