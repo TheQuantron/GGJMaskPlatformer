@@ -9,6 +9,11 @@ AProjectileActor::AProjectileActor()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	PlayerChar = CreateDefaultSubobject<APlayableCharacter>(TEXT("PlayerCharacter"));
+	PlayerCont = CreateDefaultSubobject<APlayerController>(TEXT("PlayerController"));
+	
+	HealthComp = CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"));
+	//HealthComp = UHealthComponent::OnDamageEvent(PlayerChar, DamageNum, DamageType, PlayerCont, this);
 }
 
 // Called when the game starts or when spawned

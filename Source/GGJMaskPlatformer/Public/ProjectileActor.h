@@ -5,8 +5,10 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "HealthComponent.h"
+#include "PlayableCharacter.h"
 #include "ProjectileActor.generated.h"
 
+class UHealthComponent;
 
 UCLASS()
 class GGJMASKPLATFORMER_API AProjectileActor : public AActor
@@ -18,7 +20,22 @@ public:
 	AProjectileActor();
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	float DamagerNum;
+	float DamageNum;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float FireSpeed;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	TObjectPtr<UDamageType> DamageType;
+
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
+	TObjectPtr<UHealthComponent> HealthComp;
+
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
+	TObjectPtr<APlayableCharacter> PlayerChar;
+
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
+	TObjectPtr<APlayerController> PlayerCont;
 
 protected:
 	// Called when the game starts or when spawned

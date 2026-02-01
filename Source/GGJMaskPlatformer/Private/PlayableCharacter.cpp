@@ -2,9 +2,10 @@
 
 
 #include "PlayableCharacter.h"
-
+#include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "GameFramework/SpringArmComponent.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values
@@ -15,13 +16,28 @@ APlayableCharacter::APlayableCharacter()
 
 	CapsuleComp = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CapsuleComponent"));
 	SetRootComponent(CapsuleComp);
+	CapsuleComp->SetCollisionObjectType(ECC_Pawn);
+	CapsuleComp->SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
+	CapsuleComp->SetCollisionResponseToChannel(ECC_Visibility, ECR_Ignore);
 	
 	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMesh"));
 	StaticMesh->SetupAttachment(GetRootComponent());
 
+	SpringArmComp = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArmComponent"));
+	SpringArmComp->SetupAttachment(GetRootComponent());
+	SpringArmComp->SetRelativeRotation(FRotator(0, 0, 0));
+	SpringArmComp->TargetArmLength = SpringArmLength;
+	SpringArmComp->bDoCollisionTest = false;
+	SpringArmComp->bInheritYaw = false;
+	
+	CameraComp = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraComponent"));
+	CameraComp->SetupAttachment(SpringArmComp);
+	CameraComp->SetProjectionMode(ECameraProjectionMode::Orthographic);
+
 	MovementComp = CreateDefaultSubobject<UCharacterMovementComponent>(TEXT("MovementComponent"));
 	HealthComp = CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"));
 	PlayerController = CreateDefaultSubobject<APlayerController>(TEXT("PlayerController"));
+	PlayerController = UGameplayStatics::GetPlayerController(this, 0);
 }
 
 // Called when the game starts or when spawned
@@ -43,19 +59,45 @@ void APlayableCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+	if (UEnhancedInputComponent* NewInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
+	{
+		NewInputComponent->BindAction(AttackAction, ETriggerEvent::Triggered, this, &APlayableCharacter::DoAttack);
+		NewInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &APlayableCharacter::DoMove);
+		NewInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &APlayableCharacter::DoJump);
+		NewInputComponent->BindAction(InteractAction, ETriggerEvent::Triggered, this, &APlayableCharacter::DoInteract);
+		NewInputComponent->BindAction(DodgeAction, ETriggerEvent::Triggered, this, &APlayableCharacter::DoDodge);
+	}
+
 }
 
-/*void APlayableCharacter::Movement_Implementation()
+void APlayableCharacter::DoAttack(const FInputActionValue& InputValue)
+{
+
+}
+
+void APlayableCharacter::DoMove(const FInputActionValue& InputValue)
+{
+	FVector2D Direction = InputValue.Get<FVector2D>();
+
+	if (PlayerController != nullptr)
+	{
+		FVector RightDirection = FVector(1.0f, 0.0f, 0.0f);
+		
+		AddMovementInput(RightDirection, Direction.X, true);
+	}
+}
+
+void APlayableCharacter::DoJump(const FInputActionValue& InputValue)
+{
+	FVector2D Upwards = InputValue.Get<FVector2D>();
+}
+
+void APlayableCharacter::DoInteract(const FInputActionValue& InputValue)
 {
 	
 }
 
-void APlayableCharacter::Damage_Implementation()
-{
-	//UGameplayStatics::ApplyDamage();
-}
-
-void APlayableCharacter::Death_Implementation()
+void APlayableCharacter::DoDodge(const FInputActionValue& InputValue)
 {
 	
-}*/
+}
